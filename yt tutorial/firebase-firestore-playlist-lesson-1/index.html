@@ -1,6 +1,7 @@
 <html>
     <head>
         <link rel="stylesheet" href="styles.css">
+        <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase.js"></script>
     </head>
     <body>
 
@@ -8,12 +9,31 @@
 
         <div class="content">
 
-            <form id="add-cafe-form"></form>
+            <form id="add-cafe-form">
+                <input type="text" name="name" placeholder="Cafe name">
+                <input type="text" name="city" placeholder="City">
+                <button>Add Cafe</button>
+            </form>
 
             <ul id="cafe-list"></ul>
 
         </div>
 
+        
+        <script>
+          // Initialize Firebase
+          var config = {
+            apiKey: "AIzaSyA1-gViMznaIBnlVcsI8OzSmMbHT1it4b8",
+            authDomain: "tutorial-55f15.firebaseapp.com",
+            databaseURL: "https://tutorial-55f15.firebaseio.com",
+            projectId: "tutorial-55f15",
+            storageBucket: "tutorial-55f15.appspot.com",
+            messagingSenderId: "483961486151"
+          };
+          firebase.initializeApp(config);
+          const db = firebase.firestore()
+          db.settings({timestampsInSnapshots: true})
+        </script>
         <script src="app.js"></script>
     </body>
 </html>
