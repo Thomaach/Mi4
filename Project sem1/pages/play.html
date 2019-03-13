@@ -1,0 +1,94 @@
+<template>
+<div class="page">
+  <div class="navbar">
+    <div class="navbar-inner sliding">
+      <div class="left">
+        <a href="#" class="link back">
+          <i class="icon icon-back"></i>
+          <span class="ios-only">Back</span>
+        </a>
+      </div>
+      <div class="title">The DTWS Quiz</div>
+    </div>
+  </div>
+  <div class="page-content">
+    
+    <div class="block block-strong">
+    <div id="vragen">
+        <div id="Question"></div>
+        </div> 
+       <a href="#" id="Next" class="button" @click="Next">Check Questions</a>
+    </div>
+  </div>
+</div>
+</template>
+
+<script>
+   
+  return {
+    methods: {
+     Next: function () {
+            
+        var $ = this.$;
+        var app = this.$app;
+        var router = this.$router;
+        var myApp = new Framework7(); 
+        var $$ = Dom7; 
+         
+         
+         
+         var gegevens;
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+         if (this.readyState == 4 && this.status == 200) {
+            console.log(this.responseText);
+            gegevens = JSON.parse(this.responseText);
+            Check(gegevens);
+             
+        } else{
+             
+            return;
+          }  
+        }
+        
+        function Check (gegevens){
+            
+           
+            
+            var punten = 0;
+         
+            //var formData = (app.form.getFormData("#test" + String(i)));
+            for (var i = 1; i <= 3; i++){
+                
+                if (document.getElementById(i).checked){
+                        punten++;
+                    } 
+            }
+                
+
+            
+           
+              
+               
+            //console.log("je hebt " + punten + " vragen juist!");
+            app.dialog.alert("je hebt " + punten + " vragen juist!", "Score");
+               
+          
+        }
+        
+            
+         
+        
+       //http://quizmobile.000webhostapp.com/dummy/public/api/v1/getQuestion
+       //http://mobilequiz.epizy.com/dummy/public/api/v1/getQuestion
+        xhttp.open("GET", "http://quizmobile.000webhostapp.com/dummy/public/api/v1/getQuestion", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send(); 
+         
+         
+    }
+  }
+  }
+    
+</script>
+ 

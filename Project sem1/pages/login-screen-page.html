@@ -1,0 +1,84 @@
+<template>
+    <div class="page">
+ <div class="navbar">
+    <div class="navbar-inner sliding">
+      <div class="left">
+        <a href="#" class="link back">
+          <i class="icon icon-back"></i>
+          <span class="ios-only">Back</span>
+        </a>
+      </div>
+      <div class="title">Login</div>
+    </div>
+  </div>
+  
+    <div class="page-content login-screen-content">
+      <div class="login-screen-title">DTWS Quiz</div>
+      <form id="login-form">
+        <div class="list">
+          <ul>
+            <li class="item-content item-input item-input-with-value">
+              <div class="item-inner">
+                <div class="item-title item-label">Username</div>
+                <div class="item-input-wrap">
+                  <input type="text" placeholder="Your username" id="demo-username-2" class="input-with-value">
+                  <span class="input-clear-button"></span>
+                </div>
+              </div>
+            </li>
+            <li class="item-content item-input">
+              <div class="item-inner">
+                <div class="item-title item-label">Password</div>
+                <div class="item-input-wrap">
+                  <input type="password" placeholder="Your password" id="demo-password-2" class="">
+                </div>
+              </div>
+            </li>
+          </ul>
+            
+        </div>
+        <div class="list">
+          <ul>
+            <li><a href="#" class="item-link list-button" @click="signIn">Sign In</a></li>
+          </ul>
+        </div>
+      </form>
+    </div>
+  </div>
+    
+  
+</template>
+<script>
+  return {
+    methods: {
+      signIn: function () {
+        var $ = this.$;
+        var app = this.$app;
+        var router = this.$router;
+        
+        // login
+        const loginForm = document.querySelector('#login-form');
+        loginForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          
+          // get user info
+          const email = loginForm['login-email'].value;
+          const password = loginForm['login-password'].value;
+
+          // log the user in
+          auth.signInWithEmailAndPassword(email, password).then((cred) => {
+            // close the signup modal & reset form
+            const modal = document.querySelector('#modal-login');
+            M.Modal.getInstance(modal).close();
+            loginForm.reset();
+          });
+
+        });
+          
+        
+        
+        
+      }
+    }
+  }
+</script>
