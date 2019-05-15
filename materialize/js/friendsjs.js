@@ -50,18 +50,20 @@ function toast() {
 //add friends when opening modal
 btnOpenFriends.addEventListener('click', (e) => {
 
+    // Create a reference to the Friends collection
     var friendsRef = db.collection("Friends");
+    var userid = "\""+user.uid.toString() + "\"";
+    console.log(userid)
 
-    //KOMT NOG NIKS DEFTIG UIT KIJK ER NAAR
-    var query = friendsRef.where("Status", "==", 1);
-    console.log(query);
+    // Create a query against the collection.
+    var query = friendsRef.where("Status", "==", "1").where("SenderID", "==", "RiK19gzFzaMCbuJGd7zdma98jDB3")
     
-    
-    // var ref = firebase.database().ref("Friends");
-    // ref.equalTo(user.uid).on("child_added", function(snapshot) {
-    //     console.log(snapshot.value());
-    //     //console.log(user.uid);
-    // });
+
+    query.get().then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+            console.log(doc.id, ' => ', doc.data());
+        });
+    });
 
     const html = `<div>Logged in as ${user.email}</div>`;
     accountFriends.innerHTML = html;
