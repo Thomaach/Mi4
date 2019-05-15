@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+<html lang="nl">
+
+<head>
+    <title>Friends</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!--Import materialize.css-->
+    <link href="../css/materialize.min.css" rel="stylesheet">
+    
+
+</head>
+
+<script src="https://www.gstatic.com/firebasejs/5.8.6/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyCW6QZyEmMqh00tkWhUZNOH_McRSh0qjZ4",
+        authDomain: "ytgameguide-44902.firebaseapp.com",
+        databaseURL: "https://ytgameguide-44902.firebaseio.com",
+        projectId: "ytgameguide-44902",
+        storageBucket: "ytgameguide-44902.appspot.com",
+        messagingSenderId: "175073065993"
+      };
+      firebase.initializeApp(config);
+      const auth = firebase.auth();
+      const db = firebase.firestore();
+</script>
+
+<body class="light-blue lighten-5">
+    
+    <ul class="center">
+        <li><a href="#" class="modal-trigger" data-target="modal-addfriend"><button id="AddFriends" class="btn light-blue darken-2 z-depth-0">Add Friends</button></a></li>
+    </ul>
+
+    <ul class="center">
+        <li><a href="#" class="modal-trigger" data-target="modal-friends"><button id="Friends" class="btn light-blue darken-2 z-depth-0">Friends</button></a></li>
+    </ul>
+
+   
+    
+  
+    <!-- FRIENDS MODAL -->
+  <div id="modal-friends" class="modal">
+    <div class="modal-content center-align">
+      <h4>Friends</h4><br />
+      <div class="account-friends"></div>
+      <button id="btn-Friends">Close</button>
+    </div>
+  </div>
+
+  <!-- ADD FRIEND MODAL -->
+  <div id="modal-addfriend" class="modal">
+    <div class="modal-content">
+      <h4>Add Friend</h4><br />
+      <form id="addfriend-form">
+        <div class="input-field">
+          <input type="text" id="UID" name="UID" required />
+          <label for="UID">Enter your friend's UserID</label>
+        </div>
+        <button id="CloseAddFriends" class="btn yellow darken-2 z-depth-0">Send request</button>
+      </form>
+    </div>
+  </div>
+        
+        
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="../js/friendsjs.js"></script>
+</html>
