@@ -27,6 +27,7 @@
       firebase.initializeApp(config);
       const auth = firebase.auth();
       const db = firebase.firestore();
+      
 </script>
 
 <body class="light-blue lighten-5">
@@ -39,6 +40,10 @@
         <li><a href="#" class="modal-trigger" data-target="modal-friends"><button id="Friends" class="btn light-blue darken-2 z-depth-0">Friends</button></a></li>
     </ul>
 
+    <ul class="center">
+      <li><a href="#" class="modal-trigger" data-target="modal-friendrequest"><button id="FriendsRequest" class="btn light-blue darken-2 z-depth-0">Friend Requests</button></a></li>
+  </ul>
+
    
     
   
@@ -47,7 +52,7 @@
     <div class="modal-content center-align">
       <h4>Friends</h4><br />
       <div class="account-friends"></div>
-      <button id="btn-Friends">Close</button>
+      <button id="btn-Friends" class="btn yellow darken-2 z-depth-0">Close</button>
     </div>
   </div>
 
@@ -64,6 +69,17 @@
       </form>
     </div>
   </div>
+
+  <!-- FRIEND REQUEST MODAL -->
+  <div id="modal-friendrequest" class="modal">
+    <div class="modal-content center-align">
+      <h4>Friend Requests</h4><br />
+      <div class="friendsRequests"></div>
+      <button id="btn-FriendRequests" class="btn yellow darken-2 z-depth-0">Close</button>
+    </div>
+  </div>
+
+  
         
         
 </body>
