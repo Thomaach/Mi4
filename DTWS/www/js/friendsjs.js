@@ -85,7 +85,7 @@ btnOpenFriends.addEventListener('click', (e) => {
     accountFriends.innerHTML = html;
 })
 
-
+var firendid = [];
 
 btnOpenFriendRequests.addEventListener('click', (e) => {
     // Create a reference to the Friends collection
@@ -96,7 +96,7 @@ btnOpenFriendRequests.addEventListener('click', (e) => {
     // Create a query against the collection.
     var query = friendsRef.where("Status", "==", "0").where("ReceiverID", "==", user.uid)
 
-
+    
     query.get().then(function (querySnapshot) {
         querySnapshot.forEach(function (doc) {
             console.log(doc.id, ' => ', doc.data().SenderID);
@@ -106,9 +106,13 @@ btnOpenFriendRequests.addEventListener('click', (e) => {
             queryEmail.get().then(function (snapshot) {
                 snapshot.forEach(function (snap) {
                     console.log(snap.data().Email)
-                    var html2 = "<div>id: " + doc.data().SenderID.toString() + "<br>email: " + snap.data().Email.toString() + "<br><button id=\"" + doc.data().SenderID.toString() + "\">accept</button><br><br></div>";
+                    firendid.push(doc.data().SenderID.toString()); 
+                    var number = firendid.indexOf(doc.data().SenderID.toString())
+                    //console.log(number);
+                    var html2 = "<div>id: " + doc.data().SenderID.toString() + "<br>email: " + snap.data().Email.toString() + "<br><button onClick=\"AcceptFriend(" + number + ")\" id=\"" + doc.data().SenderID.toString() + "\">accept</button><br><br></div>";
                     FriendRequesthtml.innerHTML = html2;
                     
+
                 });
             })
 
@@ -116,6 +120,10 @@ btnOpenFriendRequests.addEventListener('click', (e) => {
     })
 
 })
+
+function AcceptFriend(number) {
+    console.log(firendid[number]);
+}
 
 //close the friends modal 
 btnFriends.addEventListener('click', (e) => {
