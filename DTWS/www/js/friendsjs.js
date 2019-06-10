@@ -9,7 +9,7 @@ const btnFriends = document.querySelector('#btn-Friends');
 const btnOpenFriends = document.querySelector('#Friends');
 const btnOpenFriendRequests = document.querySelector('#FriendsRequest');
 const btnSluitFriends = document.querySelector('#btn-FriendRequests');
-const FriendRequesthtml = document.querySelector('.friendsRequests');
+const FriendRequesthtml = document.querySelector('#friendsRequests');
 
 
 auth.onAuthStateChanged(function (currentUser) {
@@ -64,7 +64,6 @@ btnOpenFriends.addEventListener('click', (e) => {
     // Create a query against the collection.
     var query = friendsRef.where("Status", "==", "1").where("SenderID", "==", user.uid)
 
-
     query.get().then(function (querySnapshot) {
         querySnapshot.forEach(function (doc) {
             console.log(doc.id, ' => ', doc.data().ReceiverID);
@@ -115,32 +114,28 @@ btnOpenFriendRequests.addEventListener('click', (e) => {
     // Create a reference to the Friends collection
     var friendsRef = db.collection("Friends");
     var userRef = db.collection("Users");
-    var html = "<div>Logged in as " + user.email + "</div><br>";
+    
 
     // Create a query against the collection.
     var query = friendsRef.where("Status", "==", "0").where("ReceiverID", "==", user.uid);
 
-    var html2 = "";
-
+    //var html2 = "";
+    var html = "";
     query.get().then(function (querySnapshot) {
         querySnapshot.forEach(function (doc) {
 
             console.log(doc.id, ' => ', doc.data().SenderID);
-
+            
             var queryEmail = userRef.where("UserID", "==", doc.data().SenderID);
-
             queryEmail.get().then(function (snapshot) {
                 snapshot.forEach(function (snap) {
-                    
                     console.log(snap.data().Email)
                     firendid.push(doc.data().SenderID.toString());
                     var number = firendid.indexOf(doc.data().SenderID.toString())
-                    //console.log(number);
-                    html2 += "<div style=\"border: 1px solid; border-radius: 5px;\">id: " + doc.data().SenderID.toString() + "<br>email: " + snap.data().Email.toString() + "<br><button onClick=\"AcceptFriend(" + number + ")\" id=\"" + doc.data().SenderID.toString() + "\"class=\"btn green darken-2 z-depth-0\">accept</button>" + "<br><button onClick=\"DeclineFriend(" + number + ")\" id=\"" + doc.data().SenderID.toString() + "\"class=\"btn red darken-2 z-depth-0\" style=\"margin-top:2px;\">Decline</button><br><br></div><br>";
-
-                });
-            }).then(() => {
-                FriendRequesthtml.innerHTML = html2;
+                    var html = "<div style=\"border: 1px solid; border-radius: 5px;\">id: " + doc.data().SenderID.toString() + "<br>email: " + snap.data().Email.toString() + "<br><button onClick=\"AcceptFriend(" + number + ")\" id=\"" + doc.data().SenderID.toString() + "\"class=\"btn green darken-2 z-depth-0\">accept</button>" + "<br><button onClick=\"DeclineFriend(" + number + ")\" id=\"" + doc.data().SenderID.toString() + "\"class=\"btn red darken-2 z-depth-0\" style=\"margin-top:2px;\">Decline</button><br><br></div><br>";
+                    //"<div style=\"border: 1px solid; border-radius: 5px;\">id: " + doc.data().SenderID.toString() + "<br>email: " + snap.data().Email.toString() + "<br><button onClick=\"AcceptFriend(" + number + ")\" id=\"" + doc.data().SenderID.toString() + "\"class=\"btn green darken-2 z-depth-0\">accept</button>" + "<br><button onClick=\"DeclineFriend(" + number + ")\" id=\"" + doc.data().SenderID.toString() + "\"class=\"btn red darken-2 z-depth-0\" style=\"margin-top:2px;\">Decline</button><br><br></div><br>";  
+                    FriendRequesthtml.innerHTML += html;
+                })
             })
         });
     })
@@ -153,7 +148,6 @@ function AcceptFriend(number) {
     // updating records 
     db.collection('cafes').doc(firendid[number]).update({
         Status: 1
-
     });
 
 
