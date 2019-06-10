@@ -106,7 +106,7 @@ btnOpenFriendRequests.addEventListener('click', (e) => {
             queryEmail.get().then(function (snapshot) {
                 snapshot.forEach(function (snap) {
                     console.log(snap.data().Email)
-                    var html2 = "<div>id: " + doc.data().SenderID.toString() + "<br>email: " + snap.data().Email.toString() + "<br><button id=\"" + doc.data().SenderID.toString() + "\">accept</button><br><br></div>";
+                    var html2 = "<div>id: " + doc.data().SenderID.toString() + "<br>email: " + snap.data().Email.toString() + "<br><button id=\"" + doc.data().SenderID.toString() + "\" class=\"btn green darken-2 z-depth-5\">accept</button><br><br></div>";
                     FriendRequesthtml.innerHTML = html2;
                     
                 });

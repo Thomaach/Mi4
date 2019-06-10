@@ -109,7 +109,7 @@ btnOpenFriendRequests.addEventListener('click', (e) => {
                     firendid.push(doc.data().SenderID.toString()); 
                     var number = firendid.indexOf(doc.data().SenderID.toString())
                     //console.log(number);
-                    var html2 = "<div>id: " + doc.data().SenderID.toString() + "<br>email: " + snap.data().Email.toString() + "<br><button onClick=\"AcceptFriend(" + number + ")\" id=\"" + doc.data().SenderID.toString() + "\">accept</button><br><br></div>";
+                    var html2 = "<div>id: " + doc.data().SenderID.toString() + "<br>email: " + snap.data().Email.toString() + "<br><button onClick=\"AcceptFriend(" + number + ")\" id=\"" + doc.data().SenderID.toString() + "\"class=\"btn green darken-2 z-depth-5\">accept</button><br><br></div>";
                     FriendRequesthtml.innerHTML = html2;
                     
 
