@@ -48,7 +48,9 @@ function SendFriendRequest() {
 
 //show toast of friend request sent after closing the modal
 function toast() {
-    M.toast({html: 'Friend request sent!!'});
+    M.toast({
+        html: 'Friend request sent!!'
+    });
 }
 
 //add friends when opening modal
@@ -72,14 +74,35 @@ btnOpenFriends.addEventListener('click', (e) => {
             queryEmail.get().then(function (snapshot) {
                 snapshot.forEach(function (snap) {
                     console.log(snap.data().Email)
-                    var html2 = "<div>id: " + doc.data().ReceiverID.toString() + "<br>email: " + snap.data().Email.toString() + "<br><br></div>";
-                    accountFriends.innerHTML += html2;
+
+                    var html3 = "<div style=\"border: 1px solid; border-radius: 5px;\">id: " + doc.data().ReceiverID.toString() + "<br>email: " + snap.data().Email.toString() + "<br><br></div><br>";
+                    accountFriends.innerHTML += html3;
                 });
             })
 
         });
-    }).then((e) => {
-        console.log(html);
+    })
+
+
+    var query2 = friendsRef.where("Status", "==", "1").where("ReceiverID", "==", user.uid)
+
+    query2.get().then(function (querySnapshot2) {
+        querySnapshot2.forEach(function (doc2) {
+            
+            console.log(doc2.id, ' => ', doc2.data().SenderID);
+
+            var queryEmail = userRef.where("UserID", "==", doc2.data().SenderID);
+
+            queryEmail.get().then(function (snapshot) {
+                snapshot.forEach(function (snap) {
+                    console.log(snap.data().Email)
+
+                    var html3 = "<div style=\"border: 1px solid; border-radius: 5px;\">id: " + doc2.data().SenderID.toString() + "<br>email: " + snap.data().Email.toString() + "<br><br></div><br>";
+                    accountFriends.innerHTML += html3;
+                });
+            })
+
+        });
     })
 
     accountFriends.innerHTML = html;
@@ -88,41 +111,63 @@ btnOpenFriends.addEventListener('click', (e) => {
 var firendid = [];
 
 btnOpenFriendRequests.addEventListener('click', (e) => {
+
     // Create a reference to the Friends collection
     var friendsRef = db.collection("Friends");
     var userRef = db.collection("Users");
     var html = "<div>Logged in as " + user.email + "</div><br>";
 
     // Create a query against the collection.
-    var query = friendsRef.where("Status", "==", "0").where("ReceiverID", "==", user.uid)
+    var query = friendsRef.where("Status", "==", "0").where("ReceiverID", "==", user.uid);
 
-    
+    var html2 = "";
+
     query.get().then(function (querySnapshot) {
         querySnapshot.forEach(function (doc) {
+
             console.log(doc.id, ' => ', doc.data().SenderID);
 
             var queryEmail = userRef.where("UserID", "==", doc.data().SenderID);
 
             queryEmail.get().then(function (snapshot) {
                 snapshot.forEach(function (snap) {
+                    
                     console.log(snap.data().Email)
-                    firendid.push(doc.data().SenderID.toString()); 
+                    firendid.push(doc.data().SenderID.toString());
                     var number = firendid.indexOf(doc.data().SenderID.toString())
                     //console.log(number);
-                    var html2 = "<div>id: " + doc.data().SenderID.toString() + "<br>email: " + snap.data().Email.toString() + "<br><button onClick=\"AcceptFriend(" + number + ")\" id=\"" + doc.data().SenderID.toString() + "\"class=\"btn green darken-2 z-depth-5\">accept</button><br><br></div>";
-                    FriendRequesthtml.innerHTML = html2;
-                    
+                    html2 += "<div style=\"border: 1px solid; border-radius: 5px;\">id: " + doc.data().SenderID.toString() + "<br>email: " + snap.data().Email.toString() + "<br><button onClick=\"AcceptFriend(" + number + ")\" id=\"" + doc.data().SenderID.toString() + "\"class=\"btn green darken-2 z-depth-0\">accept</button>" + "<br><button onClick=\"DeclineFriend(" + number + ")\" id=\"" + doc.data().SenderID.toString() + "\"class=\"btn red darken-2 z-depth-0\" style=\"margin-top:2px;\">Decline</button><br><br></div><br>";
 
                 });
+            }).then(() => {
+                FriendRequesthtml.innerHTML = html2;
             })
-
         });
     })
 
 })
 
 function AcceptFriend(number) {
-    console.log(firendid[number]);
+    console.log("accept: " + firendid[number]);
+
+    // updating records 
+    db.collection('cafes').doc(firendid[number]).update({
+        Status: 1
+
+    });
+
+
+    const modal = document.querySelector('#modal-friendrequest');
+    M.Modal.getInstance(modal).close();
+
+    firendid = [];
+}
+
+function DeclineFriend(number) {
+    console.log("decline: " + firendid[number]);
+
+    const modal = document.querySelector('#modal-friendrequest');
+    M.Modal.getInstance(modal).close();
 }
 
 //close the friends modal 

@@ -6,42 +6,50 @@
     <title>MainMenu</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!--Import materialize.css-->
     <link href="../css/materialize.min.css" rel="stylesheet">
 
 </head>
 
 <script src="https://www.gstatic.com/firebasejs/5.8.6/firebase.js"></script>
-    <script>
-      // Initialize Firebase
-      var config = {
+<script>
+    // Initialize Firebase
+    var config = {
         apiKey: "AIzaSyCW6QZyEmMqh00tkWhUZNOH_McRSh0qjZ4",
         authDomain: "ytgameguide-44902.firebaseapp.com",
         databaseURL: "https://ytgameguide-44902.firebaseio.com",
         projectId: "ytgameguide-44902",
         storageBucket: "ytgameguide-44902.appspot.com",
         messagingSenderId: "175073065993"
-      };
-      firebase.initializeApp(config);
-      const auth = firebase.auth();
-      const db = firebase.firestore();
+    };
+    firebase.initializeApp(config);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
 </script>
 
 <body class="light-blue lighten-5">
-    <ul class="center">
-        <li><button id="logout" class="btn light-blue darken-2 z-depth-0">Logout</button></li>
-    </ul>
-    <ul class="center">
-            <li><a href="./Friends.html"><button id="Friends" class="btn light-blue darken-2 z-depth-0">Friends</button></a></li>
-        </ul>
-    <ul class="center">
-        <li><button id="profile" class="btn light-blue darken-2 z-depth-0">Profile</button></li>
-    </ul>
-    
 
-  
+    <div style="padding-top: 50%;" class="center">
+        <ul>
+            <li><button id="play" class="btn light-blue darken-2 z-depth-0">Play</button></li>
+        </ul>
+        <ul>
+            <li><a href="./Friends.html"><button id="Friends"
+                        class="btn light-blue darken-2 z-depth-0">Friends</button></a></li>
+        </ul>
+        <ul>
+            <li><button id="profile" class="btn light-blue darken-2 z-depth-0">Profile</button></li>
+        </ul>
+        <ul>
+            <li><button id="logout" class="btn light-blue darken-2 z-depth-0">Logout</button></li>
+        </ul>
+    </div>
+
+
+
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script src="../js/authMenu.js"></script>
+
 </html>
