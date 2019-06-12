@@ -1,0 +1,4 @@
+#Wed Jun 12 15:18:38 CEST 2019
+base.0=D\:\\Mi4\\GitHub\\Mi4\\DTWS\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+path.0=classes.dex
+renamed.0=classes.dex
