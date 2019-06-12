@@ -1,0 +1,15 @@
+<script src="https://www.gstatic.com/firebasejs/5.8.6/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCW6QZyEmMqh00tkWhUZNOH_McRSh0qjZ4",
+    authDomain: "ytgameguide-44902.firebaseapp.com",
+    databaseURL: "https://ytgameguide-44902.firebaseio.com",
+    projectId: "ytgameguide-44902",
+    storageBucket: "ytgameguide-44902.appspot.com",
+    messagingSenderId: "175073065993"
+  };
+  firebase.initializeApp(config);
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+</script>

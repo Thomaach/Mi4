@@ -39,6 +39,7 @@ profile.addEventListener('click', (e) => {
   e.preventDefault();
   //M.toast();
   alert("id:" + user.uid + "\n" + "email: " + user.email);
+  console.log(user.uid)
 })
 
 
