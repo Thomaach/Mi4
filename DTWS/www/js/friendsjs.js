@@ -12,6 +12,7 @@ const btnSluitFriends = document.querySelector('#btn-FriendRequests');
 const FriendRequesthtml = document.querySelector('#friendsRequests');
 
 
+
 auth.onAuthStateChanged(function (currentUser) {
     if (currentUser) {
         console.log("logged in");
@@ -35,7 +36,7 @@ friendsCloseModal.addEventListener('click', (e) => {
     SendFriendRequest();
     M.Modal.getInstance(modal).close();
     addFriendFrom.reset();
-    
+
 })
 
 //function to send the friend request and put it in the database
@@ -61,8 +62,8 @@ function SearchDoubles() {
             console.log(doc.data());
             console.log(teller);
         })
-        
-    }).then(() =>{
+
+    }).then(() => {
         if (teller == 0) {
             var query = friendsRef.where("ReceiverID", "==", user.uid).where("SenderID", "==", receiverID)
 
@@ -78,7 +79,9 @@ function SearchDoubles() {
     return teller;
 }
 
-function SendTheRequest(nummer){
+function SendTheRequest(nummer) {
+    const addFriendForm = document.querySelector('#addfriend-form');
+    var receiverID = addFriendForm.UID.value;
     if (nummer != 0) {
         M.toast({
             html: 'A friend request has already been sent!!'
@@ -180,12 +183,6 @@ function QueryFriendsYourReceiver() {
     accountFriends.innerHTML = html;
 }
 
-
-
-
-
-
-
 var firendid = [];
 
 btnOpenFriendRequests.addEventListener('click', (e) => {
@@ -251,6 +248,8 @@ function DeclineFriend(number) {
 
     firendid = [];
 }
+
+
 
 //close the friends modal 
 btnFriends.addEventListener('click', (e) => {

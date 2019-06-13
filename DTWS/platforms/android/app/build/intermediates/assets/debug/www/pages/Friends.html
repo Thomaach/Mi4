@@ -3,38 +3,37 @@
 <html lang="nl">
 
 <head>
-    <title>Friends</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!--Import materialize.css-->
-    <link href="../css/materialize.min.css" rel="stylesheet">
-    
+  <title>Friends</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!--Import materialize.css-->
+  <link href="../css/materialize.min.css" rel="stylesheet">
+
 
 </head>
 
 <script src="https://www.gstatic.com/firebasejs/5.8.6/firebase.js"></script>
-    <script>
-      // Initialize Firebase
-      var config = {
-        apiKey: "AIzaSyCW6QZyEmMqh00tkWhUZNOH_McRSh0qjZ4",
-        authDomain: "ytgameguide-44902.firebaseapp.com",
-        databaseURL: "https://ytgameguide-44902.firebaseio.com",
-        projectId: "ytgameguide-44902",
-        storageBucket: "ytgameguide-44902.appspot.com",
-        messagingSenderId: "175073065993"
-      };
-      firebase.initializeApp(config);
-      const auth = firebase.auth();
-      const db = firebase.firestore();
-      
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCW6QZyEmMqh00tkWhUZNOH_McRSh0qjZ4",
+    authDomain: "ytgameguide-44902.firebaseapp.com",
+    databaseURL: "https://ytgameguide-44902.firebaseio.com",
+    projectId: "ytgameguide-44902",
+    storageBucket: "ytgameguide-44902.appspot.com",
+    messagingSenderId: "175073065993"
+  };
+  firebase.initializeApp(config);
+  const auth = firebase.auth();
+  const db = firebase.firestore();
 </script>
 
 <body class="light-blue lighten-5">
 
   <h1 class="center" style="color: #1976d2">Friends</h1>
 
-  <div style="padding-top: 25%;" class="center">
+  <div style="padding-top: 0" class="center">
 
     <ul>
       <li><a href="#" class="modal-trigger" data-target="modal-friends"><button id="Friends"
@@ -56,16 +55,29 @@
       <li><a href="./MainMenu.html"><button id="Friends" class="btn light-blue darken-2 z-depth-0">Back</button></a>
       </li>
     </ul>
+
     <ul>
-        <li><div style="display: block;  margin-left: 36%; margin-right: 50%;" id="qrcode"></div>
-        </li>
-      </ul>
+      <li>
+        <div style="display: block;  margin-left: 36%; margin-right: 50%;" id="qrcode"></div>
+      </li>
+    </ul>
+
+    <ul>
+      <li><input type="file" id="file-selector">
+      </li>
+    </ul>
+
+    <ul>
+      <li><div id="result"></div>
+      </li>
+    </ul>
+
   </div>
 
-   
-    
-  
-    <!-- FRIENDS MODAL -->
+
+
+
+  <!-- FRIENDS MODAL -->
   <div id="modal-friends" class="modal">
     <div class="modal-content center-align">
       <h4>Friends</h4><br />
@@ -97,12 +109,14 @@
     </div>
   </div>
 
-  
-        
-        
+
+
+
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script src="../js/jqurey.min.js"></script>
 <script src="../js/qrcode.min.js"></script>
+<script src="../js/qrcode.js" type="module"></script>
 <script src="../js/friendsjs.js"></script>
+
 </html>

@@ -12,6 +12,7 @@ const btnSluitFriends = document.querySelector('#btn-FriendRequests');
 const FriendRequesthtml = document.querySelector('#friendsRequests');
 
 
+
 auth.onAuthStateChanged(function (currentUser) {
     if (currentUser) {
         console.log("logged in");
@@ -19,8 +20,8 @@ auth.onAuthStateChanged(function (currentUser) {
         user = currentUser;
         var qrcode = new QRCode(document.getElementById("qrcode"), {
             text: currentUser.uid,
-            width : 100,
-            height : 100
+            width: 100,
+            height: 100
         });
     } else {
         //window.location.href = '../index.html'
@@ -35,22 +36,67 @@ friendsCloseModal.addEventListener('click', (e) => {
     SendFriendRequest();
     M.Modal.getInstance(modal).close();
     addFriendFrom.reset();
-    toast();
+
 })
 
 //function to send the friend request and put it in the database
 function SendFriendRequest() {
+    var teller = SearchDoubles();
+    //rMPoiIACFBXbqRcdBe7G7yighW72
+    SendTheRequest(teller);
+}
+
+function SearchDoubles() {
     const addFriendForm = document.querySelector('#addfriend-form');
 
     var receiverID = addFriendForm.UID.value;
+    var teller = 0;
 
-    db.collection('Friends').add({
-        ReceiverID: receiverID,
-        SenderID: user.uid,
-        Status: "0"
-    });
+    const friendsRef = db.collection("Friends");
 
+    var query = friendsRef.where("ReceiverID", "==", receiverID).where("SenderID", "==", user.uid)
+
+    query.get().then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+            teller++;
+            console.log(doc.data());
+            console.log(teller);
+        })
+
+    }).then(() => {
+        if (teller == 0) {
+            var query = friendsRef.where("ReceiverID", "==", user.uid).where("SenderID", "==", receiverID)
+
+            query.get().then(function (querySnapshot) {
+                querySnapshot.forEach(function (doc) {
+                    teller++;
+                    console.log(doc.data());
+                    console.log(teller);
+                })
+            })
+        }
+    })
+    return teller;
 }
+
+function SendTheRequest(nummer) {
+    if (nummer != 0) {
+        M.toast({
+            html: 'A friend request has already been sent!!'
+        });
+    } else {
+        console.log("er is een verzoek gestuurd")
+        db.collection('Friends').add({
+            ReceiverID: receiverID,
+            SenderID: user.uid,
+            Status: "0"
+        });
+        toast();
+    }
+}
+
+
+
 
 //show toast of friend request sent after closing the modal
 function toast() {
@@ -63,11 +109,11 @@ function toast() {
 btnOpenFriends.addEventListener('click', (e) => {
     QueryFriendsYourSender();
     QueryFriendsYourReceiver();
-    
+
 })
 
 
-function QueryFriendsYourSender(){
+function QueryFriendsYourSender() {
 
     // db.collection('Friends').get().then((snapshot) => {
     //     snapshot.docs.forEach(doc => {
@@ -135,12 +181,6 @@ function QueryFriendsYourReceiver() {
     accountFriends.innerHTML = html;
 }
 
-
-
-
-
-
-
 var firendid = [];
 
 btnOpenFriendRequests.addEventListener('click', (e) => {
@@ -148,33 +188,33 @@ btnOpenFriendRequests.addEventListener('click', (e) => {
 })
 
 function GetFriendRequests() {
-     // Create a reference to the Friends collection
-     var friendsReQ = db.collection("Friends");
-     var userReQ = db.collection("Users");
- 
- 
-     // Create a query against the collection.
-     var query = friendsReQ.where("Status", "==", "0")//.where("ReceiverID", "==", user.uid);
- 
-     //var html2 = "";
-     query.get().then(function (querySnapshot) {
-         querySnapshot.forEach(function (doc) {
- 
-             console.log(doc.id, ' => ', doc.data().SenderID);
- 
-             var queryEmail = userReQ.where("UserID", "==", doc.data().SenderID);
-             queryEmail.get().then(function (snapshot) {
-                 snapshot.forEach(function (snap) {
-                     console.log(snap.data().Email)
-                     firendid.push(doc.id);
-                     var number = firendid.indexOf(doc.id);
-                     var html = "<div style=\"border: 1px solid; border-radius: 5px;\">id: " + doc.data().SenderID.toString() + "<br>email: " + snap.data().Email.toString() + "<br><button onClick=\"AcceptFriend(" + number + ")\" id=\"" + doc.data().SenderID.toString() + "\"class=\"btn green darken-2 z-depth-0\">accept</button>" + "<br><button onClick=\"DeclineFriend(" + number + ")\" id=\"" + doc.data().SenderID.toString() + "\"class=\"btn red darken-2 z-depth-0\" style=\"margin-top:2px;\">Decline</button><br><br></div><br>";
-                     //"<div style=\"border: 1px solid; border-radius: 5px;\">id: " + doc.data().SenderID.toString() + "<br>email: " + snap.data().Email.toString() + "<br><button onClick=\"AcceptFriend(" + number + ")\" id=\"" + doc.data().SenderID.toString() + "\"class=\"btn green darken-2 z-depth-0\">accept</button>" + "<br><button onClick=\"DeclineFriend(" + number + ")\" id=\"" + doc.data().SenderID.toString() + "\"class=\"btn red darken-2 z-depth-0\" style=\"margin-top:2px;\">Decline</button><br><br></div><br>";  
-                     FriendRequesthtml.innerHTML += html;
-                 })
-             })
-         });
-     })
+    // Create a reference to the Friends collection
+    var friendsReQ = db.collection("Friends");
+    var userReQ = db.collection("Users");
+
+
+    // Create a query against the collection.
+    var query = friendsReQ.where("Status", "==", "0") //.where("ReceiverID", "==", user.uid);
+
+    //var html2 = "";
+    query.get().then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+
+            console.log(doc.id, ' => ', doc.data().SenderID);
+
+            var queryEmail = userReQ.where("UserID", "==", doc.data().SenderID);
+            queryEmail.get().then(function (snapshot) {
+                snapshot.forEach(function (snap) {
+                    console.log(snap.data().Email)
+                    firendid.push(doc.id);
+                    var number = firendid.indexOf(doc.id);
+                    var html = "<div style=\"border: 1px solid; border-radius: 5px;\">id: " + doc.data().SenderID.toString() + "<br>email: " + snap.data().Email.toString() + "<br><button onClick=\"AcceptFriend(" + number + ")\" id=\"" + doc.data().SenderID.toString() + "\"class=\"btn green darken-2 z-depth-0\">accept</button>" + "<br><button onClick=\"DeclineFriend(" + number + ")\" id=\"" + doc.data().SenderID.toString() + "\"class=\"btn red darken-2 z-depth-0\" style=\"margin-top:2px;\">Decline</button><br><br></div><br>";
+                    //"<div style=\"border: 1px solid; border-radius: 5px;\">id: " + doc.data().SenderID.toString() + "<br>email: " + snap.data().Email.toString() + "<br><button onClick=\"AcceptFriend(" + number + ")\" id=\"" + doc.data().SenderID.toString() + "\"class=\"btn green darken-2 z-depth-0\">accept</button>" + "<br><button onClick=\"DeclineFriend(" + number + ")\" id=\"" + doc.data().SenderID.toString() + "\"class=\"btn red darken-2 z-depth-0\" style=\"margin-top:2px;\">Decline</button><br><br></div><br>";  
+                    FriendRequesthtml.innerHTML += html;
+                })
+            })
+        });
+    })
 }
 
 function AcceptFriend(number) {
@@ -207,6 +247,8 @@ function DeclineFriend(number) {
     firendid = [];
 }
 
+
+
 //close the friends modal 
 btnFriends.addEventListener('click', (e) => {
     e.preventDefault();
@@ -234,9 +276,3 @@ document.addEventListener('DOMContentLoaded', function () {
     M.Collapsible.init(items);
 
 });
-
-
-
-
-
-
