@@ -80,6 +80,8 @@ function SearchDoubles() {
 }
 
 function SendTheRequest(nummer) {
+    const addFriendForm = document.querySelector('#addfriend-form');
+    var receiverID = addFriendForm.UID.value;
     if (nummer != 0) {
         M.toast({
             html: 'A friend request has already been sent!!'

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+    <title>Starter Template - Materialize</title>
+
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="../css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+
+    <script src="https://www.gstatic.com/firebasejs/6.0.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.0.1/firebase-firestore.js"></script>
+
+</head>
+
+<script src="https://www.gstatic.com/firebasejs/5.8.6/firebase.js"></script>
+
+<script>
+
+    // Initialize Firebase
+var firebaseConfig = {
+    apiKey: "AIzaSyCW6QZyEmMqh00tkWhUZNOH_McRSh0qjZ4",
+        authDomain: "ytgameguide-44902.firebaseapp.com",
+        databaseURL: "https://ytgameguide-44902.firebaseio.com",
+        projectId: "ytgameguide-44902",
+        storageBucket: "ytgameguide-44902.appspot.com",
+        messagingSenderId: "175073065993"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+// Database aanspreekbaar maken
+var firestore = firebase.firestore();
+    </script>
+
+<body>
+    <nav class="light-blue lighten-1" role="navigation">
+
+        <div class="nav-wrapper container">
+            <button id="spelNaarMenu" style="display: block; position: absolute; top: 20%; left: 1%; width: 25%; height: 60%; background-color: #fbc02d; font-size: 150%; color:#1976d2; font-weight:bold">MENU</button>
+            <h5 style="float:left; margin-left: 40%; margin-top: 4%" id="vraagNummer" href="#">Vraag: </h5>
+            <h6 id="scoreShow" style="float: right; margin-top: 5%">Score: 0</h6>
+        </div>
+    </nav>
+
+    <div id="pictureVragen" style="display: none">
+        <div class="row1" style="margin-top: 2%">
+            <div class="column" style="float: left; margin-left: 0.4em">
+                <img id="foto0" src="" style="width:100%">
+            </div>
+            <div class="column" style="float: right; margin-right: 0.4em">
+                <img id="foto1" src="" style="width:100%">
+            </div>
+        </div>
+
+        <div class="row2" style="margin-top: 2%">
+            <div class="column" style="float: left; margin-left: 0.4em">
+                <img id="foto2" src="" style="width:100%">
+            </div>
+            <div class="column" style="float: right; margin-right: 0.4em">
+                <img id="foto3" src="" style="width:100%">
+            </div>
+        </div>
+
+        <input id="inputTextPictures" readonly type="text" value="" style="margin-top: 30%; width: 70%; margin-left: 10%; text-align: center" />
+        <button id="clearInsertButtonText" style="display: block; width: 13%; height: 2.5em; float: right; margin-top: 30%; margin-right: 2%; background-color: #fbc02d">DEL</button>
+        <br>
+        <div class="buttonRow1" style="margin-top: 3%">
+            <input class="pictureButton" type="button" id="pictureButton0" value="" style="float: left; width: 11%; height: 2.5em; margin: 0.2em; background-color: #fbc02d">
+            <input class="pictureButton" type="button" id="pictureButton1" value="" style="float: left; width: 11%; height: 2.5em; margin: 0.2em; background-color: #fbc02d">
+            <input class="pictureButton" type="button" id="pictureButton2" value="" style="float: left; width: 11%; height: 2.5em; margin: 0.2em; background-color: #fbc02d">
+            <input class="pictureButton" type="button" id="pictureButton3" value="" style="float: left; width: 11%; height: 2.5em; margin: 0.2em; background-color: #fbc02d">
+            <input class="pictureButton" type="button" id="pictureButton4" value="" style="float: left; width: 11%; height: 2.5em; margin: 0.2em; background-color: #fbc02d">
+            <input class="pictureButton" type="button" id="pictureButton5" value="" style="float: left; width: 11%; height: 2.5em; margin: 0.2em; background-color: #fbc02d">
+            <input class="pictureButton" type="button" id="pictureButton6" value="" style="float: left; width: 11%; height: 2.5em; margin: 0.2em; background-color: #fbc02d">
+            <input class="pictureButton" type="button" id="pictureButton7" value="" style="float: left; width: 11%; height: 2.5em; margin: 0.2em; background-color: #fbc02d">
+            <input class="pictureButton" type="button" id="pictureButton8" value="" style="float: left; width: 11%; height: 2.5em; margin: 0.2em; background-color: #fbc02d">
+            <input class="pictureButton" type="button" id="pictureButton9" value="" style="float: left; width: 11%; height: 2.5em; margin: 0.2em; background-color: #fbc02d">
+            <input class="pictureButton" type="button" id="pictureButton10" value="" style="float: left; width: 11%; height: 2.5em; margin: 0.2em; background-color: #fbc02d">
+            <input class="pictureButton" type="button" id="pictureButton11" value="" style="float: left; width: 11%; height: 2.5em; margin: 0.2em; background-color: #fbc02d">
+            <input class="pictureButton" type="button" id="pictureButton12" value="" style="float: left; width: 11%; height: 2.5em; margin: 0.2em; background-color: #fbc02d">
+            <input class="pictureButton" type="button" id="pictureButton13" value="" style="float: left; width: 11%; height: 2.5em; margin: 0.2em; background-color: #fbc02d">
+            <input class="pictureButton" type="button" id="pictureButton14" value="" style="float: left; width: 11%; height: 2.5em; margin: 0.2em; background-color: #fbc02d">
+            <input class="pictureButton" type="button" id="pictureButton15" value="" style="float: left; width: 11%; height: 2.5em; margin: 0.2em; background-color: #fbc02d">
+        </div>
+
+        <div>
+            <button id="controlePictureButton" style="display: block; position: absolute; top: 90%; left: 20%; width: 60%; height: 5%; background-color: #fbc02d; font-size: 150%; color:#1976d2; font-weight:bold">Controle</button>
+        </div>
+    </div>
+    <div class="container">
+        <div class="section">
+            <form id="questions" action="#" name=quiz>
+                <h6 id="vraag" style="font-size: 200%; text-align: center; background-color: #FDEFCC; border-radius: 10%;"></h6>
+                <p>
+                    <label id=labelRadio0 style="display: none; margin-top: 8%">
+                        <input id="radio0" name="group1" type="radio" />
+                        <span id="AntwoordRadio0" style="font-size: 200%"></span>
+                    </label>
+                </p>
+                <p>
+                    <label id=labelRadio1 style="display: none; margin-top: 8%">
+                        <input id="radio1" name="group1" type="radio" />
+                        <span id="AntwoordRadio1" style="font-size: 200%"></span>
+                    </label>
+                </p>
+                <p>
+                    <label id=labelRadio2 style="display: none; margin-top: 8%">
+                        <input id="radio2" name="group1" type="radio" />
+                        <span id="AntwoordRadio2" style="font-size: 200%"></span>
+                    </label>
+                </p>
+                <p>
+                    <label id=labelRadio3 style="display: none; margin-top: 8%">
+                        <input id="radio3" name="group1" type="radio" />
+                        <span id="AntwoordRadio3" style="font-size: 200%"></span>
+                    </label>
+                </p>
+
+                <p>
+                    <label id=labelRadio4 style="display: none; margin-top: 8%">
+                        <input id="radio4" name="group1" type="radio" />
+                        <span id="AntwoordRadio4" style="font-size: 200%"></span>
+                    </label>
+                </p>
+
+                <p>
+                    <label id=labelRadio5 style="display: none; margin-top: 8%">
+                        <input id="radio5" name="group1" type="radio" />
+                        <span id="AntwoordRadio5" style="font-size: 200%"></span>
+                    </label>
+                </p>
+
+                <p>
+                    <label id=labelRadio6 style="display: none; margin-top: 8%">
+                        <input id="radio6" name="group1" type="radio" />
+                        <span id="AntwoordRadio6" style="font-size: 200%"></span>
+                    </label>
+                </p>
+
+
+                <!-- Multiple choice multiple answer  MCMA-->
+                <p>
+                    <label id=labelCheck0 style="display: none; margin-top: 8%">
+                        <input id="check0" name="group2" type="checkbox" class="checks" />
+                        <span id="AntwoordCheck0" class="checksValue" style="font-size: 200%"></span>
+                    </label>
+                </p>
+                <p>
+                    <label id=labelCheck1 style="display: none; margin-top: 8%">
+                        <input id="check1" name="group2" type="checkbox" class="checks" />
+                        <span id="AntwoordCheck1" class="checksValue" style="font-size: 200%"></span>
+                    </label>
+                </p>
+                <p>
+                    <label id=labelCheck2 style="display: none; margin-top: 8%">
+                        <input id="check2" name="group2" type="checkbox" class="checks" />
+                        <span id="AntwoordCheck2" class="checksValue" style="font-size: 200%"></span>
+                    </label>
+                </p>
+                <p>
+                    <label id=labelCheck3 style="display: none; margin-top: 8%">
+                        <input id="check3" name="group2" type="checkbox" class="checks" />
+                        <span id="AntwoordCheck3" class="checksValue" style="font-size: 200%"></span>
+                    </label>
+                </p>
+
+                <p>
+                    <label id=labelCheck4 style="display: none; margin-top: 8%">
+                        <input id="check4" name="group2" type="checkbox" class="checks" />
+                        <span id="AntwoordCheck4" class="checksValue" style="font-size: 200%"></span>
+                    </label>
+                </p>
+
+                <p>
+                    <label id=labelCheck5 style="display: none; margin-top: 8%">
+                        <input id="check5" name="group2" type="checkbox" class="checks" />
+                        <span id="AntwoordCheck5" class="checksValue" style="font-size: 200%"></span>
+                    </label>
+                </p>
+
+                <p>
+                    <label id=labelCheck6 style="display: none; margin-top: 8%">
+                        <input id="check6" name="group2" type="checkbox" class="checks" />
+                        <span id="AntwoordCheck6" class="checksValue" style="font-size: 200%"></span>
+                    </label>
+                </p>
+
+            </form>
+        </div>
+    </div>
+
+    <button id="controleRadioButton" style="display: none; position: absolute; top: 90%; left: 20%; width: 60%; height: 5%; background-color: #fbc02d; font-size: 150%; color:#1976d2; font-weight:bold">VOLGENDE</button>
+    <button id="controleCheckButton" style="display: none; position: absolute; top: 90%; left: 20%; width: 60%; height: 5%; background-color: #fbc02d; font-size: 150%; color:#1976d2; font-weight:bold">VOLGENDE</button>
+
+    <!--  Scripts-->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="../js/materialize.js"></script>
+    <script src="../js/firestore.js"></script>
+
+</body>
+
+</html>

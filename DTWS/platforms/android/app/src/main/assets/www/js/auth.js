@@ -9,7 +9,7 @@ loginForm.addEventListener('submit', (e) => {
   // log the user in
   auth.signInWithEmailAndPassword(email, password).then((cred) => {
     console.log("ik zit in sign in")
-    window.location.href = '../pages/MainMenu.html'
+    window.location.href = './Pages/MainMenu.html'
   });
 });
 
@@ -24,7 +24,7 @@ signupForm.addEventListener('submit', (e) => {
 
   // sign up the user
   auth.createUserWithEmailAndPassword(email, password).then(cred => {
-    window.location.href = 'pages/MainMenu.html'
+    window.location.href = 'Pages/MainMenu.html'
   })
 });
 
@@ -37,6 +37,6 @@ auth.onAuthStateChanged(function (currentUser) {
   if (currentUser) {
     console.log("logged in");
     user = currentUser;
-    window.location.href = 'pages/MainMenu.html';
+    window.location.href = 'Pages/MainMenu.html';
   }
 })

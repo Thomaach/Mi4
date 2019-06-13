@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+    <title>Starter Template - Materialize</title>
+
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="../css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+
+    <script src="https://www.gstatic.com/firebasejs/6.0.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.0.1/firebase-firestore.js"></script>
+
+</head>
+
+<body>
+    <nav class="light-blue lighten-1" role="navigation">
+        <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">GAME OVER</a>
+        </div>
+    </nav>
+    
+    <div class="column" style="float: right; margin-right: 0.4em">
+                <img id="foto1" src="../img/logoDTWS.PNG" style="width:100%">
+            </div>
+
+    <div style="position: absolute; top:45%; background-color: #FDEFCC; left: 5%; width: 90%; height: 30%; border-radius: 20%">
+    <h5 style="margin-left: 10%; position: absolute; top:20%">OLD SCORE: </h5>
+    <h5 style="margin-left: 10%; position: absolute; top:60%">NEW SCORE: </h5>
+    </div>
+ 
+    <button id="navigeerMenu" style="display: block; position: absolute; top: 80%; left: 20%; width: 60%; height: 5%; background-color: #fbc02d; font-size: 150%; color:#1976d2; font-weight:bold">MENU</button>
+
+    <button id="speelOpnieuw" style="display: block; position: absolute; top:88%; left: 20%; width: 60%; height: 5%; background-color: #fbc02d; font-size: 150%; color:#1976d2; font-weight:bold">SPEEL OPNIEUW</button>
+    
+     <!--  Scripts-->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="../js/materialize.js"></script>
+    <script src="../js/gameOver.js"></script>
+</body>
+</html>
